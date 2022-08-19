@@ -93,6 +93,24 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'tenant' => [
+            'driver' => env('TENANT_DB_DRIVER','mysql'),
+            'database' => null,
+            'host' => env('TENANT_DB_HOST','127.0.0.1'),
+            'username' => env('TENANT_DB_USERNAME','root'),
+            'password' => env('TENANT_DB_PASSWORD',''),
+            // And other options if needed ...
+        ],
+
+        'landlord' => [
+            'driver' => env('LANDLORD_DB_DRIVER','mysql'),
+            'database' => env('LANDLORD_DB_DATABASE','landlord'),
+            'host' => env('LANDLORD_DB_HOST','127.0.0.1'),
+            'username' => env('LANDLORD_DB_USERNAME','root'),
+            'password' => env('LANDLORD_DB_PASSWORD',''),
+            // And other options if needed ...
+        ],
+
     ],
 
     /*
