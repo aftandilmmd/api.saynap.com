@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return ['Laravel' => app()->version()];
+Route::get('/create-tenant', static function () {
+
+    $random = \Illuminate\Support\Str::random();
+
+    $tenant = new \App\Models\Tenant;
+    $tenant->name = 'Caner';
+    $tenant->domain = 'salon_'. $random;
+    $tenant->database = 'tenant_salon_'.$random;
+    $tenant->save();
+
+    return $tenant;
 });
 
 require __DIR__.'/auth.php';
