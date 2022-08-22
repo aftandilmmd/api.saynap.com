@@ -2,17 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Spatie\Multitenancy\Models\Tenant as BaseTenant;
 
 class Tenant extends BaseTenant
 {
-    protected static function booted()
+    protected static function booted(): void
     {
-        static::creating(static fn(Tenant $model) => $model->createDatabase());
+        static::creating(static fn(Tenant $model) => $model->runCreateActions());
     }
 
-    public function createDatabase()
+    public function runCreateActions(): void
     {
-        // TODO:: add tenant logic to create database
+        $this->createDatabase();
+
+        $this->migrate();
+    }
+
+    public function createDatabase(): void
+    {
+        DB::connection('tenant')->statement('CREATE DATABASE ' . $this->getDatabaseName());
+    }
+
+    public function migrate(): void
+    {
+        Artisan::call('tenants:artisan "migrate --database=tenant"');
     }
 }
