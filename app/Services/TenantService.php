@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\DB;
 class TenantService
 {
 
-    public static function createDatabase(Tenant $tenant): void
+    public function __construct(public Tenant $tenant){}
+
+    public function createDatabase(): void
     {
-        DB::connection('tenant')->statement('CREATE DATABASE ' . $tenant->getDatabaseName());
+        DB::connection('tenant')->statement('CREATE DATABASE ' . $this->tenant->getDatabaseName());
     }
 
-    public static function migrate(): void
+    public function migrate(): void
     {
-        Artisan::call('tenants:artisan "migrate --database=tenant"');
+        Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='. $this->tenant->getKey());
     }
 
 }
