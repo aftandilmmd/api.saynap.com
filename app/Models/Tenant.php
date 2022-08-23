@@ -9,11 +9,14 @@ class Tenant extends BaseTenant
 {
     protected static function booted(): void
     {
+        // TODO :: Move this to event / listen class in the future.
         static::created(static function(Tenant $tenant) {
 
-            TenantService::createDatabase($tenant);
+            $tenantService = new TenantService($tenant);
 
-            TenantService::migrate();
+            $tenantService->createDatabase();
+
+            $tenantService->migrate();
 
         });
     }
