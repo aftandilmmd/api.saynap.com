@@ -1,0 +1,7 @@
+{
+    "Company": true,
+    "User": true,
+    "Contact": true,
+    "Service": true,
+    "Appointment": true
+}
