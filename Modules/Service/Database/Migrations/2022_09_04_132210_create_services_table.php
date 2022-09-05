@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', static function (Blueprint $table) {
+        Schema::create('services', static function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
 
             $table->string('name',256);
-            $table->date('birth_date')->nullable();
-            $table->json('phones')->nullable();
+            $table->string('category',256)->nullable();
+            $table->integer('price')->nullable();
+            $table->boolean('status')->default(true);
             $table->json('data')->nullable();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('companies', static function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('name',256)->unique();
             $table->string('slug',256)->unique()->index();

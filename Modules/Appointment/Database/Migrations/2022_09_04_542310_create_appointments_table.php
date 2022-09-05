@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('appointments', static function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies');
 
             $table->string('date',256);
             $table->unsignedBigInteger('contact_id');
@@ -24,6 +23,10 @@ return new class extends Migration
             $table->json('note')->nullable();
             $table->json('data')->nullable();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 
