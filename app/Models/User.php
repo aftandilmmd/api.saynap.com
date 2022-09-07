@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,4 +48,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class);
     }
+
+    public function services(): HasManyThrough
+    {
+        return $this->hasManyThrough(Service::class, Company::class);
+    }
+
+    public function contacts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Contact::class, Company::class);
+    }
+
+    public function appointments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Appointment::class, Company::class);
+    }
+
 }

@@ -12,10 +12,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resources([
-        'companies' => CompanyController::class,
-        'services' => ServiceController::class,
-        'contacts' => ContactController::class,
-        'appointments' => AppointmentController::class,
-    ]);
+
 });
+
+Route::resources([
+    'companies' => CompanyController::class,
+    'services' => ServiceController::class,
+    'contacts' => ContactController::class,
+    'appointments' => AppointmentController::class,
+]);
