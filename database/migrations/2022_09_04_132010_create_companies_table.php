@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->string('name',256)->unique();
-            $table->string('slug',256)->unique()->index();
+            $table->string('name')->unique();
+            $table->string('slug')->unique()->index();
             $table->string('address',512);
             $table->json('phones')->nullable();
             $table->json('data')->nullable();

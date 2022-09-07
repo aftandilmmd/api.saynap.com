@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id');
 
-            $table->string('date',256);
+            $table->dateTime('date');
             $table->unsignedBigInteger('contact_id');
             $table->unsignedBigInteger('service_id');
             $table->json('note')->nullable();

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
 
-            $table->string('name',256);
-            $table->smallInteger('duration')->nullable();
+            $table->string('name');
             $table->date('birth_date')->nullable();
             $table->json('phones')->nullable();
+            $table->string('note')->nullable();
             $table->json('data')->nullable();
             $table->timestamps();
         });

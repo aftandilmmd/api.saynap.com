@@ -18,9 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
 
-            $table->string('name',256);
-            $table->string('category',256)->nullable();
+            $table->string('name');
+            $table->string('category')->nullable();
             $table->integer('price')->nullable();
+            $table->smallInteger('duration')->nullable();
             $table->boolean('status')->default(true);
             $table->json('data')->nullable();
             $table->timestamps();
