@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Http\Resources\ContactResource;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        return User::first()->contacts()->paginate(500);
+        return ContactResource::collection(User::first()->contacts()->paginate(500));
     }
 
     public function create()
@@ -22,7 +23,7 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
-        return Contact::create($request->validated());
+        return auth()->user()->company->contacts()->create($request->validated());
     }
 
     public function show($id)

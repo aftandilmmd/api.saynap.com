@@ -12,13 +12,9 @@ class Contact extends Model{
 
     protected $fillable = ['company_id','name','birth_date','phones','note','data'];
 
-    protected function phones(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => is_null($value) ? [""] : $value,
-            set: static fn ($value) => json_encode($value),
-        );
-    }
+    protected $casts = [
+      'phones' => 'array'
+    ];
 
     public function company(): BelongsTo
     {
